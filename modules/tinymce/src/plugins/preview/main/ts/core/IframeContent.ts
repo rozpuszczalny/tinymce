@@ -11,6 +11,9 @@ const getPreviewHtml = (editor: Editor): string => {
 
   headHtml += '<base href="' + encode(editor.documentBaseURI.getURI()) + '">';
 
+  // Provide default background for content iframe, will be overriden by custom content styles
+  headHtml += '<style type="text/css">body { background: #fff; }</style>';
+
   const cors = Options.shouldUseContentCssCors(editor) ? ' crossorigin="anonymous"' : '';
   Tools.each(editor.contentCSS, (url) => {
     headHtml += '<link type="text/css" rel="stylesheet" href="' + encode(editor.documentBaseURI.toAbsolute(url)) + '"' + cors + '>';
