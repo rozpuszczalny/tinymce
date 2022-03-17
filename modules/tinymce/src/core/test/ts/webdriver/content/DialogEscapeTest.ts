@@ -4,17 +4,16 @@ import { TinyHooks } from '@ephox/wrap-mcagar';
 import { assert } from 'chai';
 
 import Editor from 'tinymce/core/api/Editor';
-// eslint-disable-next-line mocha/no-exclusive-tests
-describe('alloy.browser.ui.dialog.DialogEscapeTest', () => {
+
+describe('webdriver.tinymce.core.content.DialogEscapeTest', () => {
   const hook = TinyHooks.bddSetupLight<Editor>({
     schema: 'html5',
     plugins: 'code',
     base_url: '/project/tinymce/js/tinymce'
   }, []);
 
-  const pressEscape = async () => {
+  const pressEscape = async () =>
     await RealKeys.pSendKeysOn('.tox-dialog textarea', [ RealKeys.text('\uE00C') ]);
-  };
 
   it('Check dialog component can be focused', async () => {
     const editor = hook.editor();
