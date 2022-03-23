@@ -1,4 +1,4 @@
-import { Keys, RealKeys } from '@ephox/agar';
+import { RealKeys } from '@ephox/agar';
 import { describe, it } from '@ephox/bedrock-client';
 import { TinyHooks } from '@ephox/wrap-mcagar';
 import { assert } from 'chai';
@@ -17,22 +17,15 @@ describe('webdriver.tinymce.core.content.DialogEscapeTest', () => {
 
   it('Check dialog component can be focused', async () => {
     const editor = hook.editor();
-    let closedWindow = 0;
-    let escapeKeyUp = 0;
-    let escapeKeyDown = 0;
-
+    const events = [];
     const closeListener = () => {
-      closedWindow++;
+      events.push('close');
     };
     const keyUpListener = (e) => {
-      if (e.keyCode === Keys.escape()) {
-        escapeKeyUp++;
-      }
+      events.push('keyup-' + e.keyCode);
     };
     const keyDownListener = (e) => {
-      if (e.keyCode === Keys.escape()) {
-        escapeKeyDown++;
-      }
+      events.push('keydown-' + e.keyCode);
     };
 
     editor.on('CloseWindow', closeListener);
@@ -47,8 +40,6 @@ describe('webdriver.tinymce.core.content.DialogEscapeTest', () => {
     editor.off('keyup', keyUpListener);
     editor.off('keydown', keyDownListener);
 
-    assert.equal(escapeKeyUp, 0, 'Escape up');
-    assert.equal(escapeKeyDown, 0, 'Escape down');
-    assert.equal(closedWindow, 1, 'closed window');
+    assert.deepEqual(events, [ 'close' ]);
   });
 });
