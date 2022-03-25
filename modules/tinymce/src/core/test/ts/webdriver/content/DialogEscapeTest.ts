@@ -1,5 +1,6 @@
-import { RealKeys } from '@ephox/agar';
+import { RealKeys, UiFinder } from '@ephox/agar';
 import { describe, it } from '@ephox/bedrock-client';
+import { SugarElement } from '@ephox/sugar';
 import { TinyHooks } from '@ephox/wrap-mcagar';
 import { assert } from 'chai';
 
@@ -33,6 +34,7 @@ describe('webdriver.tinymce.core.content.DialogEscapeTest', () => {
     editor.on('keydown', keyDownListener);
 
     editor.execCommand('mceCodeEditor');
+    UiFinder.pWaitFor('Wait for code window', SugarElement.fromDom(editor.getBody()), '.tox-dialog textarea')
 
     await pressEscape();
 
