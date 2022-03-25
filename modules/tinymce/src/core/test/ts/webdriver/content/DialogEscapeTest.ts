@@ -34,7 +34,7 @@ describe('webdriver.tinymce.core.content.DialogEscapeTest', () => {
     editor.on('keydown', keyDownListener);
 
     editor.execCommand('mceCodeEditor');
-    UiFinder.pWaitFor('Wait for code window', SugarElement.fromDom(editor.getBody()), '.tox-dialog textarea')
+    UiFinder.pWaitFor('Wait for code window', SugarElement.fromDom(editor.getBody()), '.tox-dialog textarea');
 
     await pressEscape();
 
