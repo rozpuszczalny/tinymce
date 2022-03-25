@@ -92,7 +92,7 @@ describe('browser.tinymce.themes.silver.editor.DialogPopupsTest', () => {
     TinyUiActions.keydown(editor, Keys.enter());
     await FocusTools.pTryOnSelector('Focus should be inside colorpicker', doc, '.tox-swatch');
     assertVisibleFocusInside(FocusTools.getFocused, '.tox-swatches');
-    TinyUiActions.keyup(editor, Keys.escape());
+    TinyUiActions.keydown(editor, Keys.escape());
     await FocusTools.pTryOnSelector('Focus should return to colorinput button', doc, 'span[aria-haspopup="true"]');
     TinyUiActions.keyup(editor, Keys.escape());
     await pWaitForDialogClosed();
